@@ -48,14 +48,15 @@ export default function AddBookScreen({ navigation, user }) {
 
     setSubmitting(true);
     try {
-      await addDoc(collection(db, 'books'), {
-        title: title.trim(),
-        author: author.trim(),
-        genre,
-        status,
-        pageCount: parseInt(pageCount, 10) || 0,
-        rating: parseInt(rating, 10) || 3,
-      });
+await addDoc(collection(db,'books'),{
+  title:title.trim(),
+  author:author.trim(),
+  genre,
+  status,
+  pageCount: parseInt(pageCount,10) || 0,
+  rating: parseInt(rating, 10|| 3,
+                   uiserId: user.uid,
+                   });  
       navigation.goBack();
     } catch (err) {
       console.error('Failed to add book', err);
