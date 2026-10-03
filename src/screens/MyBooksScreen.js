@@ -33,6 +33,9 @@ export default function MyBooksScreen({ navigation, user, onSignOut }) {
       try {
         const snapshot = await getDocs(collection(db, 'books'));
         const results = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        .filrter(book==> book.userId===user.uid)
+        .sort(a, b) ==>(Number(b.rating)
+                        || 0) -(number(a.rating) || 0));
         setBooks(results);
       } catch (err) {
         console.error('Failed to fetch books', err);
