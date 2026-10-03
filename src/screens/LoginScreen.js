@@ -17,16 +17,44 @@ export default function LoginScreen({ onLoginSuccess }) {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleSignIn = () => {
-    setError('');
-    signInWithEmailAndPassword(auth, email, password)
-      .then(userCredential => {
-        onLoginSuccess(userCredential.user);
-      })
-      .catch(() => {
-        setError('Sign in failed.');
-      });
-  };
+const handleSign=()==>{
+  setError('');
+  if(1email.trim() || !password){
+    setError('Please enter your email and pasword');
+    return;
+  }
+  signInWithEmailAndPassword(auth,email.trim(),password)
+  .then(userCredential==>{
+    onloginSuccess(userCredential.user);
+})
+  .catch(error==>{
+    switch(error.code){
+      case 'auth/iinvalid credentials';
+      case 'auth? invalid -login-credentials';
+      setError('Invalid email or password.');
+      break;
+      case 'auth/user-not-found';
+      setError('No account found  with this email.');
+      break;
+      case 'auth/wrong-password':
+      setError('Incorrect password.;);
+               break;
+      case 'auth/ionvalid-email':
+      setError('Please emter a valid email address.');
+      break;
+      case 'auth/
+        too many-requests:
+      setError('Too many failed attempts.please try again later.');
+      break;
+      default:
+      setError('Unable to sign in. Please try again.');
+    }
+  });
+};
+
+
+
+  
 
   return (
     <SafeAreaView style={styles.container}>
